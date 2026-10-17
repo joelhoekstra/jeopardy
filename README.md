@@ -63,6 +63,13 @@ The first row must be a header. Columns are read by header name:
 4. **GitHub Pages (optional).** Put the files from the `github-pages` folder in the repo root, with the web app URL as the iframe source in `index.html`. Turn on Pages for the repo.
 5. **Home screen.** Open the Pages link on a phone and use Add to Home Screen. Delete and re-add the bookmark after changing the icon, since phones cache it.
 
+## Who's playing
+
+- The first time on a device, a player picks their name. After that the game remembers it, so it opens straight to their board.
+- The GitHub page keeps that choice on the device and passes it to the game.
+- A personal link such as `https://<your-pages-address>/?player=Sam` opens the game as that player and remembers it. Players can save their own link to their home screen.
+- The player dropdown in the header still switches players, and the new choice is remembered.
+
 ## Updating the game
 
 - After any change to `Code.gs` or `Index.html`, deploy a **new version** (Deploy → Manage deployments → Edit → New version). The web app link stays the same, so the GitHub page doesn't need to change.
@@ -75,7 +82,6 @@ The first row must be a header. Columns are read by header name:
 | Clue timer length | `CLUE_SECONDS` in `Index.html` | 20 seconds |
 | Admin PIN | `ADMIN_PIN` in `Index.html` | change it from the default |
 | Spreadsheet | `SPREADSHEET_ID` in `Code.gs` | your sheet's ID |
-| Icon link (Apps Script only) | `ICON_URL` in `Code.gs` | blank, not needed with the GitHub page |
 
 ## Known limits
 
@@ -83,7 +89,7 @@ The first row must be a header. Columns are read by header name:
 - **The Admin PIN is not real security.** It is checked in the browser only, which is fine for a friendly group. Don't put the PIN or the sheet ID in a public README.
 - **Each player's history lives in one sheet cell** (limit about 50,000 characters, which is roughly years of play). A failed save shows a warning.
 - **The leaderboard is a snapshot.** It updates when a page loads, not live.
-- **Home-screen app on iPhone** may ask you to pick your player each time it is launched.
+- **Remembering who is playing** relies on the browser keeping storage for the page. If a phone clears it (for example after a long time unused), the player picker simply appears again.
 
 ## Ideas for later
 
