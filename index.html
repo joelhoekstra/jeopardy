@@ -38,9 +38,32 @@
   </style>
 </head>
 <body>
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbynbWAGnXRfnV3qpG6KF9vkBJIo4VFqeGh7WyRE1vv17M56cGjzrzov3xweA6bK559E/exec"
-    title="Daily Jeopardy"
-    allow="fullscreen"></iframe>
+  <iframe id="game" title="Daily Jeopardy" allow="fullscreen"></iframe>
+
+  <script>
+    (function () {
+      var GAME_URL = 'https://script.google.com/macros/s/AKfycbynbWAGnXRfnV3qpG6KF9vkBJIo4VFqeGh7WyRE1vv17M56cGjzrzov3xweA6bK559E/exec';
+      var KEY = 'jeopardy-player';
+
+      // A personal link like .../jeopardy/?player=Sam always wins, and is remembered from then on
+      var fromLink = new URLSearchParams(location.search).get('player');
+      if (fromLink) { try { localStorage.setItem(KEY, fromLink); } catch (e) {} }
+
+      var player = fromLink;
+      if (!player) { try { player = localStorage.getItem(KEY); } catch (e) {} }
+
+      // Open the game already signed in as that player (if we know who it is)
+      document.getElementById('game').src = GAME_URL + (player ? '?player=' + encodeURIComponent(player) : '');
+
+      // The game tells us who is playing, so we can remember it on this device
+      window.addEventListener('message', function (e) {
+        if (!/^https:\/\/([a-z0-9-]+\.)*(googleusercontent|google)\.com$/.test(e.origin)) return;
+        var d = e.data;
+        if (d && d.type === 'jeopardy-player' && typeof d.name === 'string' && d.name.length > 0 && d.name.length < 100) {
+          try { localStorage.setItem(KEY, d.name); } catch (err) {}
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
