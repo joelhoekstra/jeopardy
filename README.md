@@ -9,7 +9,7 @@ It runs on Google Apps Script with a Google Sheet as the database, and is embedd
 - **One clue per day.** The board has 6 categories. Each tile shows its dollar value and the date it unlocks. The date-to-tile assignment is shuffled per month.
 - **Board size.** 5 rows for 30-day months (and February). 31-day months get a 6th row with a single extra clue; the leftover squares are blank.
 - **Scoring.** Correct answers add the tile's value, wrong answers subtract it, and a pass costs nothing.
-- **Timer.** Each clue has 20 seconds from the moment it is revealed. If time runs out it counts as a pass, with no change to the bankroll.
+- **Timer.** Each clue has 45 seconds from the moment it is revealed. If time runs out it counts as a pass, with no change to the bankroll.
 - **Sunday Daily Double.** Sundays let you wager from $0 up to your bankroll (or up to $1,000 if your bankroll is below $1,000) before the clue is revealed.
 - **Unlock order.** All of Monday to Saturday must be done before that week's Sunday, and Sunday must be done before the next Monday.
 - **Missed days.** Past days you haven't played show a cyan border and can still be played later.
